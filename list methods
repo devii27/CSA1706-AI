@@ -1,0 +1,7 @@
+l = [1, 2]
+l.append(3)
+l.extend([4, 5])
+l.insert(1, 9)
+l.remove(2)
+del l[0]
+print(l)
