@@ -1,0 +1,6 @@
+a = [1, 2, 3]
+b = [4, 5]
+nested = [a, b]
+print(len(a), a + b, 2 in a)
+for i in a: print(i)
+print(a[0], a[1:], nested)
