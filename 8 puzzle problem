@@ -1,0 +1,40 @@
+from collections import deque
+
+goal_state = '123456780'
+
+def is_goal(state):
+    return state == goal_state
+
+def get_neighbors(state):
+    neighbors = []
+    i = state.index('0')
+    row, col = divmod(i, 3)
+    moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    for dr, dc in moves:
+        r, c = row + dr, col + dc
+        if 0 <= r < 3 and 0 <= c < 3:
+            j = r * 3 + c
+            lst = list(state)
+            lst[i], lst[j] = lst[j], lst[i]
+            neighbors.append(''.join(lst))
+    return neighbors
+
+def bfs(start):
+    visited = set()
+    queue = deque([(start, [])])
+    while queue:
+        state, path = queue.popleft()
+        if state in visited:
+            continue
+        visited.add(state)
+        if is_goal(state):
+            return path + [state]
+        for neighbor in get_neighbors(state):
+            queue.append((neighbor, path + [state]))
+    return None
+
+start_state = '724506831'
+solution = bfs(start_state)
+for step in solution:
+    print(step[:3], "\n" + step[3:6], "\n" + step[6:], "\n")
